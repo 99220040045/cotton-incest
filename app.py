@@ -1,11 +1,17 @@
 from flask import Flask, request, render_template, send_file, jsonify
+
 from ultralytics import YOLO
 from PIL import Image
 import io
 import os
+import sys
 
 app = Flask(__name__)
-model = YOLO('sigmoid.pt')
+try:
+    model = YOLO('sigmoid.pt')
+except Exception as e:
+    print(f"Error loading YOLO model: {e}", file=sys.stderr)
+    model = None
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_image():
@@ -89,4 +95,5 @@ def upload_image():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 10000))
+    app.run(host='0.0.0.0', port=port, debug=True)
