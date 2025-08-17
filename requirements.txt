@@ -3,4 +3,3 @@ ultralytics
 torch
 Pillow
 numpy
-gunicorn
