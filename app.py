@@ -15,7 +15,16 @@ def upload_image():
                 return jsonify({'error': 'No image uploaded'}), 400
             file = request.files['image']
             img = Image.open(file.stream)
-            results = model(img)
+            # Resize image to max 640x640 to reduce memory usage
+            max_size = (640, 640)
+            img = img.convert("RGB")
+            img.thumbnail(max_size, Image.LANCZOS)
+            try:
+                results = model(img)
+            except RuntimeError as re:
+                if "out of memory" in str(re).lower():
+                    return jsonify({'error': 'Server out of memory. Try a smaller image or contact admin.'}), 500
+                return jsonify({'error': f'Model inference error: {str(re)}'}), 500
             boxes = results[0].boxes.xyxy.cpu().numpy() if results[0].boxes is not None else []
             names = results[0].names if hasattr(results[0], 'names') else model.names
             classes = results[0].boxes.cls.cpu().numpy() if results[0].boxes is not None else []
