@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bollworm Detection</title>
+    <link rel="stylesheet" href="https://unpkg.com/@21stdev/ui/dist/21stdev-ui.css">
+    <style>
+        body {
+            background: #f6f7fb;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 56px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            padding: 36px 32px 28px 32px;
+        }
+        h1 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 24px;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .ui-input label {
+            font-weight: 500;
+            color: #444;
+        }
+        .ui-btn-primary {
+            width: 100%;
+            font-size: 1rem;
+            padding: 10px 0;
+            border-radius: 6px;
+            background: #222;
+            color: #fff;
+            border: none;
+        }
+        #result {
+            margin-top: 0;
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 32px;
+        }
+        .result-image {
+            flex: 0 0 260px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .image-preview {
+            max-width: 260px;
+            border-radius: 10px;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+        }
+        .result-details {
+            flex: 1;
+            min-width: 220px;
+            text-align: left;
+            background: none;
+            box-shadow: none;
+            padding: 0;
+        }
+        .result-details h3 {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #222;
+            letter-spacing: 0.5px;
+        }
+        .result-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .result-details li {
+            margin-bottom: 18px;
+            text-align: left;
+            background: none;
+            border-radius: 0;
+            padding: 0 0 12px 0;
+            box-shadow: none;
+            border-bottom: 1px solid #eee;
+        }
+        .drop-area {
+            border: 2px dashed #bbb;
+            border-radius: 10px;
+            padding: 32px 18px;
+            text-align: center;
+            background: #f9f9fb;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+        }
+        .drop-area.dragover {
+            border-color: #222;
+            background: #f1f1f7;
+        }
+        .drop-text {
+            color: #888;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .ui-btn-secondary {
+            background: #eee;
+            color: #222;
+            border-radius: 6px;
+            border: none;
+            padding: 8px 18px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+        @media (max-width: 600px) {
+            #result {
+                flex-direction: column;
+                gap: 18px;
+                align-items: stretch;
+            }
+            .result-image {
+                max-width: 100%;
+                margin-bottom: 18px;
+            }
+            .image-preview {
+                max-width: 100%;
+            }
+            .result-details {
+                min-width: 0;
+                padding: 0;
+            }
+            .result-details h3 {
+                font-size: 1.1em;
+                margin-bottom: 8px;
+            }
+            .result-details li {
+                font-size: 0.97em;
+                padding-bottom: 8px;
+            }
+            .drop-area {
+                padding: 18px 6px;
+            }
+            .ui-btn-primary, .ui-btn-secondary {
+                font-size: 0.97em;
+                padding: 8px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Insect Species Detection</h1>
+        <div id="result"></div>
+        <form id="uploadForm">
+            <div class="drop-area" id="dropArea">
+                <div class="drop-text" id="dropText">Drag & drop an image here<br>or</div>
+                <input type="file" id="image" name="image" accept="image/*" required style="display:none;" />
+                <button type="button" class="ui-btn ui-btn-secondary" id="selectBtn">Select Image</button>
+                <div id="fileName" style="margin-top:10px;color:#666;font-size:0.95em;"></div>
+            </div>
+            <button class="ui-btn ui-btn-primary" type="submit" style="margin-top:18px;">Detect</button>
+        </form>
+    </div>
+    <script src="https://unpkg.com/@21stdev/ui/dist/21stdev-ui.js"></script>
+    <script>
+        const form = document.getElementById('uploadForm');
+        const resultDiv = document.getElementById('result');
+        const dropArea = document.getElementById('dropArea');
+        const fileInput = document.getElementById('image');
+        const selectBtn = document.getElementById('selectBtn');
+        const fileName = document.getElementById('fileName');
+        let selectedFile = null;
+
+        // Drag and drop events
+        dropArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropArea.classList.add('dragover');
+        });
+        dropArea.addEventListener('dragleave', (e) => {
+            dropArea.classList.remove('dragover');
+        });
+        dropArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropArea.classList.remove('dragover');
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                selectedFile = e.dataTransfer.files[0];
+                fileInput.files = e.dataTransfer.files;
+                fileName.textContent = selectedFile.name;
+            }
+        });
+
+        // Select button
+        selectBtn.addEventListener('click', () => {
+            fileInput.click();
+        });
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files && fileInput.files[0]) {
+                selectedFile = fileInput.files[0];
+                fileName.textContent = selectedFile.name;
+            }
+        });
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            resultDiv.innerHTML = '<div class="ui-loader">Detecting...</div>';
+            const file = selectedFile || fileInput.files[0];
+            if (!file) return;
+            const formData = new FormData();
+            formData.append('image', file);
+            try {
+                const response = await fetch('/', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                let html = '';
+                let imgHtml = '';
+                let detailsHtml = '';
+                if (data.image) {
+                    imgHtml = `<img src="data:image/jpeg;base64,${data.image}" class="image-preview" alt="Detected Insects" />`;
+                }
+                if (data.count && Object.keys(data.count).length > 0) {
+                    detailsHtml += `<h3>Detection Results</h3><ul>`;
+                    for (const [name, count] of Object.entries(data.count)) {
+                        if (data.details && data.details[name]) {
+                            const d = data.details[name];
+                            detailsHtml += `<li><strong>${d.common_name || name}</strong>: ${count}`;
+                            detailsHtml += `<br><span class='ui-label ui-label-info'>Scientific Name:</span> ${d.scientific_name || ''}`;
+                            detailsHtml += `<br><span class='ui-label ui-label-info'>Description:</span> ${d.description || ''}`;
+                            detailsHtml += `<br><span class='ui-label ui-label-success'>Suggestion:</span> ${d.suggestion || ''}`;
+                            if (d.key_points && d.key_points.length > 0) {
+                                detailsHtml += `<br><span class='ui-label ui-label-info'>Key Points:</span><ul style='margin:6px 0 0 12px;'>`;
+                                for (const kp of d.key_points) {
+                                    detailsHtml += `<li style='font-size:0.97em;color:#444;'>${kp}</li>`;
+                                }
+                                detailsHtml += `</ul>`;
+                            }
+                            if (d.habitat) {
+                                detailsHtml += `<br><span class='ui-label ui-label-info'>Habitat:</span> ${d.habitat}`;
+                            }
+                            if (d.role) {
+                                detailsHtml += `<br><span class='ui-label ui-label-info'>Role:</span> ${d.role}`;
+                            }
+                            detailsHtml += `</li>`;
+                        } else {
+                            detailsHtml += `<li><strong>${name}</strong>: ${count}</li>`;
+                        }
+                    }
+                    detailsHtml += `</ul>`;
+                }
+                if (data.warning) {
+                    detailsHtml += `<div class="ui-card-warning">${data.warning}</div>`;
+                }
+                html = `<div class="result-image">${imgHtml}</div><div class="result-details">${detailsHtml}</div>`;
+                resultDiv.innerHTML = html;
+            } catch (err) {
+                resultDiv.innerHTML = `<div class="ui-card-error">Error: ${err.message}</div>`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+{
+  "lacewing": {
+    "common_name": "Green Lacewing",
+    "scientific_name": "Chrysopidae",
+    "description": "Lacewings are beneficial insects that prey on aphids and other pests.",
+    "suggestion": "Encourage lacewings in your field for natural pest control.",
+    "key_points": [
+      "Eggs are laid on foliage and hatch in 4-5 days.",
+      "Larvae are voracious predators of soft-bodied insects.",
+      "Adults are attracted to light and are harmless to plants."
+    ],
+    "habitat": "Found in gardens, fields, and forests.",
+    "role": "Biological pest control agent."
+  },
+  "ladybug_dy": {
+    "common_name": "Seven-spotted Ladybug",
+    "scientific_name": "Coccinella septempunctata",
+    "description": "Ladybug (DY) is a common predator of aphids and scale insects.",
+    "suggestion": "Ladybugs are helpful; avoid using broad-spectrum insecticides.",
+    "key_points": [
+      "Both larvae and adults feed on pests.",
+      "Bright red color with black spots.",
+      "Can consume up to 5,000 aphids in a lifetime."
+    ],
+    "habitat": "Meadows, gardens, and crop fields.",
+    "role": "Natural enemy of crop pests."
+  },
+  "ladybug_lbq": {
+    "common_name": "Asian Lady Beetle",
+    "scientific_name": "Harmonia axyridis",
+    "description": "Ladybug (LBQ) is known for its voracious appetite for pests.",
+    "suggestion": "Protect ladybugs to maintain pest control.",
+    "key_points": [
+      "Can be orange, yellow, or red with variable spots.",
+      "Sometimes invades homes in winter.",
+      "Effective against aphids and scale insects."
+    ],
+    "habitat": "Fields, gardens, and urban areas.",
+    "role": "Beneficial predator."
+  },
+  "ladybug_hb": {
+    "common_name": "Yellow Ladybug",
+    "scientific_name": "Propylea japonica",
+    "description": "Ladybug (HB) is a beneficial insect in crop fields.",
+    "suggestion": "Support ladybug populations for healthy crops.",
+    "key_points": [
+      "Yellow color with black spots.",
+      "Feeds on aphids and small insects.",
+      "Active during spring and summer."
+    ],
+    "habitat": "Crop fields and gardens.",
+    "role": "Pest control agent."
+  },
+  "stinkbug_mx": {
+    "common_name": "Southern Green Stink Bug",
+    "scientific_name": "Nezara viridula",
+    "description": "Stinkbug (MX) can be a pest in vegetable crops.",
+    "suggestion": "Monitor stinkbug populations and use targeted control if needed.",
+    "key_points": [
+      "Green color, shield-shaped body.",
+      "Feeds on plant sap, causing damage.",
+      "Can transmit plant diseases."
+    ],
+    "habitat": "Vegetable fields and gardens.",
+    "role": "Crop pest."
+  },
+  "stinkbug_mc": {
+    "common_name": "Brown Stink Bug",
+    "scientific_name": "Euschistus servus",
+    "description": "Stinkbug (MC) feeds on plant juices and can damage crops.",
+    "suggestion": "Use pheromone traps for stinkbug management.",
+    "key_points": [
+      "Brown color, shield-shaped body.",
+      "Damages fruits and vegetables.",
+      "Releases foul odor when disturbed."
+    ],
+    "habitat": "Fields and orchards.",
+    "role": "Crop pest."
+  },
+  "stinkbug_lv": {
+    "common_name": "Plautia Stink Bug",
+    "scientific_name": "Plautia crossota",
+    "description": "Stinkbug (LV) is a minor pest in some regions.",
+    "suggestion": "Regular scouting helps early detection.",
+    "key_points": [
+      "Greenish color, small size.",
+      "Feeds on plant sap.",
+      "Rarely causes major damage."
+    ],
+    "habitat": "Crop fields and gardens.",
+    "role": "Minor pest."
+  },
+  "stinkbug_hsy": {
+    "common_name": "Brown Marmorated Stink Bug",
+    "scientific_name": "Halyomorpha halys",
+    "description": "Stinkbug (HSY) is an invasive species causing crop losses.",
+    "suggestion": "Remove weeds and debris to reduce stinkbug habitat.",
+    "key_points": [
+      "Brown color with white bands on antennae.",
+      "Feeds on fruits, vegetables, and ornamentals.",
+      "Highly invasive and difficult to control."
+    ],
+    "habitat": "Wide range of habitats including homes.",
+    "role": "Major invasive pest."
+  },
+  "stinkbug_ccc": {
+    "common_name": "Green Stink Bug",
+    "scientific_name": "Chinavia hilaris",
+    "description": "Stinkbug (CCC) can affect fruit and vegetable quality.",
+    "suggestion": "Use row covers to protect crops.",
+    "key_points": [
+      "Bright green color.",
+      "Feeds on a variety of crops.",
+      "Can cause deformities in fruit."
+    ],
+    "habitat": "Fields and gardens.",
+    "role": "Crop pest."
+  },
+  "stinkbug_zh": {
+    "common_name": "Blue Stink Bug",
+    "scientific_name": "Zicrona caerulea",
+    "description": "Stinkbug (ZH) is less common but can be found in some fields.",
+    "suggestion": "Monitor and manage as needed.",
+    "key_points": [
+      "Metallic blue color.",
+      "Feeds on small insects and plants.",
+      "Rarely a major pest."
+    ],
+    "habitat": "Fields and meadows.",
+    "role": "Occasional pest."
+  },
+  "syrphid": {
+    "common_name": "Hoverfly",
+    "scientific_name": "Syrphidae",
+    "description": "Syrphid flies are pollinators and their larvae eat aphids.",
+    "suggestion": "Encourage syrphid flies for pollination and pest control.",
+    "key_points": [
+      "Adults mimic bees or wasps.",
+      "Larvae are important aphid predators.",
+      "Harmless to humans."
+    ],
+    "habitat": "Gardens, fields, and forests.",
+    "role": "Pollinator and pest control agent."
+  },
+  "bee": {
+    "common_name": "Honey Bee",
+    "scientific_name": "Apis mellifera",
+    "description": "Bees are essential pollinators for many crops.",
+    "suggestion": "Protect bees by minimizing pesticide use during bloom.",
+    "key_points": [
+      "Live in colonies with a queen.",
+      "Produce honey and wax.",
+      "Vital for crop pollination."
+    ],
+    "habitat": "Hives, gardens, and fields.",
+    "role": "Pollinator."
+  },
+  "bollworm": {
+    "common_name": "Cotton Bollworm",
+    "scientific_name": "Helicoverpa armigera",
+    "description": "Bollworm is a major pest of cotton and other crops.",
+    "suggestion": "Use integrated pest management (IPM) strategies for bollworm control.",
+    "key_points": [
+      "Larvae feed on cotton bolls and other crops.",
+      "Can cause significant yield loss.",
+      "Resistant to many insecticides."
+    ],
+    "habitat": "Cotton fields and other crop areas.",
+    "role": "Major crop pest."
+  }
+}
